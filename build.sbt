@@ -14,3 +14,6 @@ libraryDependencies += "com.h2database" % "h2" % "1.4.196"
 
 libraryDependencies += "com.typesafe.play" %% "anorm" % "2.5.3"
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
+
+enablePlugins(PlayScala, PlayNettyServer)
+disablePlugins(PlayAkkaHttpServer)
