@@ -1,0 +1,58 @@
+--- (Running the application, auto-reloading is enabled) ---
+
+[info] p.c.s.NettyServer - Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+
+(Server started, use Enter to stop and go back to the console...)
+
+[info] Compiling 13 Scala sources and 1 Java source to {my-application-path}\target\scala-2.12\classes ...
+[warn] there were three feature warnings; re-run with -feature for details
+[warn] one warning found
+[info] Done compiling.
+[info] application - Creating Pool for datasource 'default'
+[info] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+[info] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+[info] p.a.d.DefaultDBApi - Database [default] connected at jdbc:h2:mem:play
+[error] application -
+
+! @76j193i02 - Internal server error, for (GET) [/] ->
+
+play.api.db.evolutions.InvalidDatabaseRevision: Database 'default' needs evolution![An SQL script need to be run on your database.]
+        at play.api.db.evolutions.ApplicationEvolutions.$anonfun$runEvolutions$1(ApplicationEvolutions.scala:78)
+        at play.api.db.evolutions.ApplicationEvolutions.withLock(ApplicationEvolutions.scala:100)
+        at play.api.db.evolutions.ApplicationEvolutions.runEvolutions(ApplicationEvolutions.scala:49)
+        at play.api.db.evolutions.ApplicationEvolutions.$anonfun$start$1(ApplicationEvolutions.scala:42)
+        at play.api.db.evolutions.ApplicationEvolutions.$anonfun$start$1$adapted(ApplicationEvolutions.scala:42)
+        at scala.collection.immutable.List.foreach(List.scala:389)
+        at play.api.db.evolutions.ApplicationEvolutions.start(ApplicationEvolutions.scala:42)
+        at play.api.db.evolutions.ApplicationEvolutions.<init>(ApplicationEvolutions.scala:151)
+        at play.api.db.evolutions.ApplicationEvolutionsProvider.get$lzycompute(EvolutionsModule.scala:50)
+        at play.api.db.evolutions.ApplicationEvolutionsProvider.get(EvolutionsModule.scala:49)
+[info] application - Shutting down connection pool.
+[info] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+[error] application -
+
+! @76j1ac66n - Internal server error, for (GET) [/@evolutions/apply/default?redirect=http%3A%2F%2Flocalhost%3A9000%2F] ->
+
+play.api.http.HttpErrorHandlerExceptions$$anon$1: Execution exception[[SQLException: HikariDataSource HikariDataSource (HikariPool-1) has been closed.]]
+        at play.api.http.HttpErrorHandlerExceptions$.throwableToUsefulException(HttpErrorHandler.scala:255)
+        at play.api.http.DefaultHttpErrorHandler.onServerError(HttpErrorHandler.scala:182)
+        at play.api.http.DefaultHttpErrorHandler$.onServerError(HttpErrorHandler.scala:286)
+        at play.core.server.Server.logExceptionAndGetResult$1(Server.scala:52)
+        at play.core.server.Server.getHandlerFor(Server.scala:82)
+        at play.core.server.Server.getHandlerFor$(Server.scala:48)
+        at play.core.server.NettyServer.getHandlerFor(NettyServer.scala:45)
+        at play.core.server.netty.PlayRequestHandler.handle(PlayRequestHandler.scala:97)
+        at play.core.server.netty.PlayRequestHandler.channelRead(PlayRequestHandler.scala:178)
+        at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:362)
+Caused by: java.sql.SQLException: HikariDataSource HikariDataSource (HikariPool-1) has been closed.
+        at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:91)
+        at play.api.db.DefaultDatabase.getConnection(Databases.scala:142)
+        at play.api.db.evolutions.DatabaseEvolutions.databaseEvolutions(EvolutionsApi.scala:135)
+        at play.api.db.evolutions.DatabaseEvolutions.scripts(EvolutionsApi.scala:113)
+        at play.api.db.evolutions.DatabaseEvolutions.scripts(EvolutionsApi.scala:128)
+        at play.api.db.evolutions.DefaultEvolutionsApi.scripts(EvolutionsApi.scala:93)
+        at play.api.db.evolutions.EvolutionsWebCommands.handleWebCommand(ApplicationEvolutions.scala:365)
+        at play.core.DefaultWebCommands.$anonfun$handleWebCommand$1(WebCommands.scala:40)
+        at scala.collection.immutable.Stream.flatMap(Stream.scala:486)
+        at play.core.DefaultWebCommands.handleWebCommand(WebCommands.scala:40)
+[info] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
